@@ -1,0 +1,83 @@
+{ "frames": {
+   "daemon 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 1.ase": {
+    "frame": { "x": 108, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 2.ase": {
+    "frame": { "x": 216, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 3.ase": {
+    "frame": { "x": 324, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 4.ase": {
+    "frame": { "x": 432, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 5.ase": {
+    "frame": { "x": 540, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 6.ase": {
+    "frame": { "x": 648, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 7.ase": {
+    "frame": { "x": 756, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   },
+   "daemon 8.ase": {
+    "frame": { "x": 864, "y": 0, "w": 108, "h": 84 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 108, "h": 84 },
+    "sourceSize": { "w": 108, "h": 84 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.2-dev",
+  "image": "daemon.png",
+  "format": "RGBA8888",
+  "size": { "w": 972, "h": 84 },
+  "scale": "1"
+ }
+}

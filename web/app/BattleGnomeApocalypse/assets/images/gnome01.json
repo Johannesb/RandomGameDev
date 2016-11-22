@@ -1,0 +1,43 @@
+{ "frames": {
+   "gnome01 0.ase": {
+    "frame": { "x": 0, "y": 0, "w": 72, "h": 186 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 72, "h": 186 },
+    "sourceSize": { "w": 72, "h": 186 },
+    "duration": 100
+   },
+   "gnome01 1.ase": {
+    "frame": { "x": 72, "y": 0, "w": 72, "h": 186 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 72, "h": 186 },
+    "sourceSize": { "w": 72, "h": 186 },
+    "duration": 100
+   },
+   "gnome01 2.ase": {
+    "frame": { "x": 144, "y": 0, "w": 72, "h": 186 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 72, "h": 186 },
+    "sourceSize": { "w": 72, "h": 186 },
+    "duration": 100
+   },
+   "gnome01 3.ase": {
+    "frame": { "x": 216, "y": 0, "w": 72, "h": 186 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 72, "h": 186 },
+    "sourceSize": { "w": 72, "h": 186 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.1.2-dev",
+  "image": "gnome01.png",
+  "format": "RGBA8888",
+  "size": { "w": 288, "h": 186 },
+  "scale": "1"
+ }
+}
