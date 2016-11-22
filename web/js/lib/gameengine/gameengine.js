@@ -5,7 +5,7 @@ define(['lib/pixi'],
   {
     return function (p_size, p_bg)
     {
-      var DEBUG = true;
+      var DEBUG = false;
 
       var renderer = PIXI.autoDetectRenderer(p_size.width, p_size.height),
           stage    = new PIXI.Container(),
@@ -16,11 +16,24 @@ define(['lib/pixi'],
 
       this.view = renderer.view;
 
+      var looping = true;
+
       // start game loop
       this.create = function (p_loop)
       {
         loop = p_loop;
 
+        requestAnimationFrame(animate);
+      };
+
+      this.stop = function ()
+      {
+        looping = false;
+      };
+
+      this.start = function ()
+      {
+        looping = true;
         requestAnimationFrame(animate);
       };
 
@@ -38,7 +51,8 @@ define(['lib/pixi'],
       // rendering & calling loop
       function animate(now)
       {
-        requestAnimationFrame(animate);
+        if (looping) requestAnimationFrame(animate);
+        else return;
 
         if (!lastRender) lastRender = now;
         var dt     = (now - lastRender) / 60;

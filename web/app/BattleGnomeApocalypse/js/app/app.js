@@ -18,7 +18,9 @@ define(
 
         var loader = new PIXI.loaders.Loader();
         loader.add('assets/images/fireball01.json');
+        loader.add('assets/images/daemon.json');
         loader.add('assets/images/gnome01.json');
+        loader.add('pixeled', 'assets/fonts/pixeled.fnt');
 
         loader.load(function ()
         {
@@ -31,10 +33,13 @@ define(
       };
 
 
-      var obj_player,
+      var score         = 0,
+          obj_score,
+          obj_player,
           obj_ground,
           obj_particles,
           obj_lifes     = new PIXI.Container(),
+          obj_daemons   = new PIXI.Container(),
           obj_fireballs = new PIXI.Container();
 
       function initGame()
@@ -52,6 +57,8 @@ define(
         });
         gameengine.addChild(obj_ground);
 
+        gameengine.addChild(obj_daemons);
+
         createPlayer();
 
         // create lifes
@@ -65,11 +72,27 @@ define(
           obj_lifes.addChild(obj);
         }
         gameengine.addChild(obj_lifes);
+
+        // create score
+        obj_score            = new PIXI.extras.BitmapText(score.toString(), {font: '72px Pixeled', align: 'right'});
+        obj_score.position.x = size.width - obj_score.textWidth - 10;
+        obj_score.position.y = -5;
+        obj_score.tint = 0x8f2424;
+        gameengine.addChild(obj_score);
       }
 
       function createParticles()
       {
-        obj_particles = ParticleSystem.create(ParticleSystem.Rectangle, {scale: [size.width, size.height]});
+        obj_particles = ParticleSystem.create(ParticleSystem.Rectangle, {
+          scale:        [size.width, size.height],
+          alpha:        {start: .75, end: 0},
+          color:        {start: 0xe03f16, end: 0xe01616},
+          speed:        [-10, 0, 2],
+          acceleration: [0, .25],
+          lifetime:     {min: 500, max: 2000},
+          frequency:    200,
+          particle:     [Object.Single, {src: 'assets/images/pixel.png'}]
+        });
         gameengine.addChild(obj_particles);
       }
 
@@ -78,7 +101,7 @@ define(
         obj_player = new Object.create(Object.Clip, {
           position:       [size.width / 2, size.height / 2],
           anchor:         [.5, 1],
-          acceleration:   [0, 10],
+          acceleration:   [0, 11],
           frameCount:     4,
           frameName:      'gnome01 %i.ase',
           animationSpeed: .2
@@ -114,6 +137,7 @@ define(
           {
             obj_player._.position.y = obj_ground.position.y - obj_ground.height;
             jump                    = 0;
+            obj_player._.speed.y    = 0;
           }
           // collision with walls
           if (obj_player._.position.x < obj_player.width / 2) obj_player._.position.x = obj_player.width / 2;
@@ -166,10 +190,31 @@ define(
         obj_fireballs.addChild(obj);
       }
 
+      function spawnDaemon()
+      {
+        var pos = new Vector2D([Math.randomInt(54, size.width - 54), size.height - obj_ground.height + 6]);
+
+        var obj = new Object.create(Object.Clip, {
+          position:       [pos.x, pos.y],
+          anchor:         [.5, 1],
+          frameCount:     9,
+          frameName:      'daemon %i.ase',
+          animationSpeed: .2
+        });
+
+        obj.loop = false;
+        obj.play();
+
+        obj_daemons.addChild(obj);
+      }
+
       function loop(dt)
       {
         if (Math.random() * dt < .005)
           spawnFireball();
+
+        if (Math.random() * dt < .002)
+          spawnDaemon();
 
         // collision player with fireballs
         var list = Collision(obj_player, obj_fireballs);
@@ -178,8 +223,39 @@ define(
           obj_fireballs.removeChild(fireball);
           obj_lifes.children.pop();
 
-          if (obj_lifes.children.length == 0) console.log('Game Over!');
+          if (obj_lifes.children.length == 0) gameOver();
         });
+
+        // collision player with daemons
+        var list = Collision(obj_player, obj_daemons);
+        list.forEach(function (daemon)
+        {
+          if (daemon.hit) return;
+
+          if (obj_player._.speed.y <= 0) return;
+
+          score++;
+
+          obj_score.text       = score.toString();
+          obj_score.position.x = size.width - obj_score.width - 10;
+
+          daemon.hit = true;
+          daemon.animationSpeed *= -1;
+          daemon.play();
+
+          setTimeout(
+            function ()
+            {
+              obj_daemons.removeChild(daemon);
+            },
+            750
+          );
+        });
+      }
+
+      function gameOver()
+      {
+        gameengine.stop();
       }
     }
   }

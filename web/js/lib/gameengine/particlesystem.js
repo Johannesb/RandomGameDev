@@ -41,13 +41,13 @@ define(['lib/pixi', 'lib/func', 'lib/vector2d', 'lib/gameengine/object', 'lib/ma
       create: function (p_emitter, p_params)
               {
                 p_params              = _.default(p_params, {});
-                p_params.alpha        = _.default(p_params.alpha, {start: .5, end: 0});
+                p_params.alpha        = _.default(p_params.alpha, {start: 1, end: 0});
                 p_params.scale        = _.default(p_params.scale, {start: 1, end: 1});
-                p_params.color        = _.default(p_params.color, {start: 0xe03f16, end: 0xe01616});
-                p_params.speed        = _.default(p_params.speed, [-7, 0]);
-                p_params.acceleration = _.default(p_params.acceleration, [0, .25]);
-                p_params.lifetime     = _.default(p_params.lifetime, {min: 500, max: 2000});
-                p_params.frequency    = _.default(p_params.frequency, 200);
+                p_params.color        = _.default(p_params.color, {start: 0xffffff, end: 0xffffff});
+                p_params.speed        = _.default(p_params.speed, [0, 0, 0]);
+                p_params.acceleration = _.default(p_params.acceleration, [0, 0]);
+                p_params.lifetime     = _.default(p_params.lifetime, {min: 500, max: 1000});
+                p_params.frequency    = _.default(p_params.frequency, 100);
                 p_params.particle     = _.default(p_params.particle, [Object.Single, {src: 'assets/images/pixel.png'}]);
 
                 var obj = new PIXI.Container();
@@ -78,6 +78,18 @@ define(['lib/pixi', 'lib/func', 'lib/vector2d', 'lib/gameengine/object', 'lib/ma
                                 return;
                               }
 
+                              if (this._.speed.wiggle > 0)
+                              {
+                                var wiggleX = Math.random() * this._.speed.wiggle;
+                                wiggleX -= this._.speed.wiggle / 2;
+
+                                var wiggleY = Math.random() * this._.speed.wiggle;
+                                wiggleY -= this._.speed.wiggle / 2;
+
+                                obj._.speed.x += wiggleX;
+                                obj._.speed.y += wiggleY;
+                              }
+
                               var faktor = (now - obj._.creation) / obj._.lifetime;
 
                               obj.alpha = this._.alpha.start - faktor * Math.abs(this._.alpha.start - this._.alpha.end);
@@ -86,6 +98,8 @@ define(['lib/pixi', 'lib/func', 'lib/vector2d', 'lib/gameengine/object', 'lib/ma
                             }.bind(this));
                           }.bind(obj)
                 };
+
+                obj._.speed.wiggle = p_params.speed[2];
 
                 return obj;
               }
