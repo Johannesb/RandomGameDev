@@ -30,7 +30,6 @@ define(
 
       function startRoomGame()
       {
-        room     = null;
         room     = new room_game(size);
         room.end = gameOver;
 
