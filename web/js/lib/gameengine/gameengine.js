@@ -16,25 +16,20 @@ define(['lib/pixi'],
 
       this.view = renderer.view;
 
-      var looping = true;
+      var looping = true, myLoop;
 
       // start game loop
-      this.create = function (p_loop)
+      this.start = function (p_loop)
       {
         loop = p_loop;
-
-        requestAnimationFrame(animate);
+        looping = true;
+        myLoop = requestAnimationFrame(animate);
       };
 
       this.stop = function ()
       {
         looping = false;
-      };
-
-      this.start = function ()
-      {
-        looping = true;
-        requestAnimationFrame(animate);
+        cancelAnimationFrame(myLoop);
       };
 
       // add something to stage
@@ -51,7 +46,7 @@ define(['lib/pixi'],
       // rendering & calling loop
       function animate(now)
       {
-        if (looping) requestAnimationFrame(animate);
+        if (looping) myLoop = requestAnimationFrame(animate);
         else return;
 
         if (!lastRender) lastRender = now;
